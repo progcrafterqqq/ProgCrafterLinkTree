@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Info</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      animation: fadeIn 1s ease-out;
+    }
+    h1, h2 {
+      color: #ffffff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #bb86fc, transparent);
+      animation: slideIn 2s ease-out;
+    }
+    p {
+      margin: 1rem 0;
+      font-size: 1rem;
+      opacity: 0;
+      animation: slideUp 0.6s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+    .nicknames {
+      list-style: none;
+      padding: 0;
+    }
+    .nicknames li {
+      background: #1e1e1e;
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: popIn 0.5s ease-out forwards;
+    }
+    .nicknames li:nth-child(1) { animation-delay: 0.3s; }
+    .nicknames li:nth-child(2) { animation-delay: 0.6s; }
+    .nicknames li:nth-child(3) { animation-delay: 0.9s; }
+    .nicknames li:nth-child(4) { animation-delay: 1.2s; }
+    
+    .nicknames li:hover {
+      background-color: #333;
+      transform: scale(1.05);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(187, 134, 252, 0.5);
+    }
+    
+    a {
+      color: #bb86fc;
+      text-decoration: none;
+      position: relative;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+    a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #bb86fc;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease-out;
+    }
+    a:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #2b2b2b;
+      color: #e0e0e0;
+      border: 1px solid #444;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
+      animation-delay: 1.5s;
+    }
+    .back-button:hover {
+      background-color: #3c3c3c;
+      transform: translateX(-5px);
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    }
+    .back-button::after {
+      display: none;
+    }
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #757575;
+      animation: fadeIn 1s ease-out;
+      animation-delay: 1.8s;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+      from { width: 0; left: 50%; }
+      to { width: 50%; left: 25%; }
+    }
+    
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      70% {
+        transform: translateX(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .container::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 6s infinite linear;
+      pointer-events: none;
+    }
+    
+    @keyframes shine {
+      from { transform: translateX(-100%) rotate(30deg); }
+      to { transform: translateX(100%) rotate(30deg); }
+    }
+    
+    .cursor-trail {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(187, 134, 252, 0.5);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      animation: fadeOut 1s forwards;
+    }
+    
+    @keyframes fadeOut {
+      from { opacity: 0.7; width: 5px; height: 5px; }
+      to { opacity: 0; width: 25px; height: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>About Me</h1>
+    <p>Hello! I am an enthusiastic programming student with a passion for technology and coding. I use various nicknames in my projects, including:</p>
+    <ul class="nicknames">
+      <li>mewnity</li>
+      <li>mewntech</li>
+      <li>mewnitytech</li>
+      <li>and many others...</li>
+    </ul>
+    <p>Always verify information and stay curious. This project is a showcase of my journey and interests in the world of programming. Thanks for visiting!</p>
+    <a href="index.html" class="back-button">← Back</a>
+    <div class="footer">
+      <p>© 2025 Mewnity. All rights reserved.</p>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('mousemove', function(e) {
+      const trail = document.createElement('div');
+      trail.className = 'cursor-trail';
+      trail.style.left = e.pageX + 'px';
+      trail.style.top = e.pageY + 'px';
+      document.body.appendChild(trail);
+      
+      setTimeout(() => {
+        document.body.removeChild(trail);
+      }, 1000);
+    });
+    
+    const container = document.querySelector('.container');
+    document.addEventListener('mousemove', function(e) {
+      const x = (window.innerWidth / 2 - e.pageX) / 30;
+      const y = (window.innerHeight / 2 - e.pageY) / 30;
+      
+      container.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+    
+    document.addEventListener('mouseleave', function() {
+      container.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+    });
+  </script>
+</body>
+</html>

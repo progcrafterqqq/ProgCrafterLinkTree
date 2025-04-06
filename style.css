@@ -1,0 +1,272 @@
+:root {
+    --dark-gray: #1A1A1A;
+    --graphite: #2C2C2C;
+    --asphalt: #4A4A4A;
+    --steel: #5D5D5D;
+    --light-smoke: #B0B0B0;
+    --accent: #bb86fc;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes popUp {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    70% {
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes shine {
+    from { transform: translateX(-100%) rotate(30deg); }
+    to { transform: translateX(100%) rotate(30deg); }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 0.7; width: 5px; height: 5px; }
+    to { opacity: 0; width: 25px; height: 25px; }
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: unbounded;
+    background-color: var(--dark-gray);
+    color: var(--light-smoke);
+    min-height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  body::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.03) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    animation: shine 8s infinite linear;
+    pointer-events: none;
+  }
+  
+  .container {
+    padding: 2rem;
+    margin-left: 5%;
+    width: 90%;
+    max-width: 1200px;
+    position: relative;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--light-smoke);
+    opacity: 0;
+    animation: slideIn 0.6s ease-out forwards;
+    position: relative;
+  }
+  
+  .title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    animation: slideIn 1s ease-out forwards;
+    animation-delay: 0.6s;
+  }
+  
+  .button-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .btn {
+    opacity: 0;
+    animation: slideIn 0.6s ease-out forwards;
+    animation-delay: var(--delay);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--graphite);
+    color: var(--light-smoke);
+    text-decoration: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--asphalt);
+    width: 180px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.7s;
+  }
+  
+  .btn:hover::before {
+    left: 100%;
+  }
+  
+  .mini-btn {
+    opacity: 0;
+    animation: slideIn 0.6s ease-out forwards;
+    animation-delay: var(--delay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--graphite);
+    color: var(--light-smoke);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 1px solid var(--asphalt);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .mini-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.7s;
+  }
+  
+  .mini-btn:hover::before {
+    left: 100%;
+  }
+  
+  .btn:hover, .mini-btn:hover {
+    background-color: var(--asphalt);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--steel);
+  }
+  
+  .btn:active, .mini-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Button animations for sequential appearance */
+  .btn:nth-child(1), .mini-btn:nth-child(1) {
+    --delay: 0.2s;
+  }
+  .btn:nth-child(2), .mini-btn:nth-child(2) {
+    --delay: 0.4s;
+  }
+  .btn:nth-child(3), .mini-btn:nth-child(3) {
+    --delay: 0.6s;
+  }
+  .btn:nth-child(4), .mini-btn:nth-child(4) {
+    --delay: 0.8s;
+  }
+  .btn:nth-child(5), .mini-btn:nth-child(5) {
+    --delay: 1s;
+  }
+  
+  /* Floating animation for some elements */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Cursor trail effect */
+  .cursor-trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(187, 134, 252, 0.5);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    animation: fadeOut 1s forwards;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      margin-left: 1rem;
+      padding: 1.5rem;
+    }
+    .title {
+      font-size: 2rem;
+    }
+    .btn {
+      width: 160px;
+      padding: 0.7rem 1.2rem;
+    }
+    .mini-btn {
+      width: 36px;
+      height: 36px;
+    }
+  }
